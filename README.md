@@ -1,6 +1,14 @@
-# 🚀 Next.js E-commerce Platform
+# 🍕 O'Miam - Plateforme Moderne de Commande de Pizzas
 
-> Une plateforme e-commerce moderne et sécurisée construite avec Next.js 14, TypeScript, et les meilleures pratiques de développement.
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-green?style=for-the-badge&logo=supabase)](https://supabase.com/)
+[![Stripe](https://img.shields.io/badge/Stripe-Payments-purple?style=for-the-badge&logo=stripe)](https://stripe.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+
+## 🚀 Vue d'Ensemble
+
+O'Miam est une plateforme web moderne et complète pour la commande de pizzas en ligne, développée avec les dernières technologies web. Elle offre une expérience utilisateur exceptionnelle avec des fonctionnalités avancées d'e-commerce, de gestion de restaurant et d'optimisations de performance.
 
 ## ✨ Fonctionnalités
 
