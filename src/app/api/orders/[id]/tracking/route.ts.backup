@@ -1,0 +1,40 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+// Types pour le suivi de commande
+interface OrderStatus { status: string; timestamp: string; message?: string; estimatedTime?: string;
+}
+
+interface OrderMessage {
+  id: string;
+  message: string;
+  timestamp: string;
+  type: 'info' | 'warning' | 'success' | 'error';
+  from: 'system' | 'admin' | 'delivery';
+}
+
+interface OrderTrackingData { orderId: string; currentStatus: OrderStatus; statusHistory: OrderStatus[]; messages: OrderMessage[]; estimatedDelivery?: string; deliveryAddress?: any; phone?: string; totalAmount: number; items: Array<{ id: string; productName: string; quantity: number; price: number; }>;
+}
+
+export async function GET( request: NextRequest, { params }: { params: Promise<{ id: string }> }
+) { const { id } = await params; try { // Vérifier l'authentification const supabaseAuth = createRouteHandlerClient({ cookies }); const { data: { session }, error: authError } = await supabaseAuth.auth.getSession(); if (authError || !session?.user) { return NextResponse.json( { error: 'Authentification requise' }, { status: 401 } ); } const orderId = id; const userId = session.user.id; // Récupérer la commande avec ses détails const { data: order, error: orderError } = await supabase .from('orders') .select(` *, order_items ( id, quantity, price, customizations, products ( id, name, description ) ), profiles ( id, full_name, email ) `) .eq('id', orderId) .eq('user_id', userId) .single(); if (orderError || !order) { return NextResponse.json( { error: "Commande non trouvée" }, { status: 404 } ); } // Récupérer l'historique des statuts depuis les notifications const { data: notifications, error: notificationsError } = await supabase .from('order_notifications') .select('*') .eq('order_id', orderId) .order('created_at', { ascending: true }); if (notificationsError) { console.error('Erreur lors de la récupération des notifications:', notificationsError); } // Construire l'historique des statuts const statusHistory: OrderStatus[] = []; const messages: OrderMessage[] = []; // Ajouter le statut initial statusHistory.push({ status: 'PENDING', timestamp: order.created_at, message: 'Commande reçue' }); // Traiter les notifications pour construire l'historique if (notifications) { notifications.forEach((notification) => { // Si c'est un changement de statut if (notification.type === 'status_change') { statusHistory.push({ status: notification.data?.new_status || order.status, timestamp: notification.created_at, message: notification.message }); } // Ajouter tous les messages messages.push({ id: notification.id, message: notification.message, timestamp: notification.created_at, type: notification.type === 'error' ? 'error' : notification.type === 'warning' ? 'warning' : notification.type === 'status_change' ? 'success' : 'info', from: notification.data?.from || 'system' }); }); } // S'assurer que le statut actuel est dans l'historique const lastStatus = statusHistory[statusHistory.length - 1]; if (!lastStatus || lastStatus.status !== order.status) { statusHistory.push({ status: order.status, timestamp: order.updated_at, message: getStatusMessage(order.status) }); } // Préparer l'adresse de livraison let deliveryAddress = null; if (order.delivery_address) { try { deliveryAddress = JSON.parse(order.delivery_address); } catch (e) { console.error('Erreur lors du parsing de l\'adresse:', e); } } // Construire les données de suivi const trackingData: OrderTrackingData = { orderId: order.id, currentStatus: { status: order.status, timestamp: order.updated_at, message: getStatusMessage(order.status) }, statusHistory, messages, estimatedDelivery: order.estimated_delivery, deliveryAddress, phone: order.phone, totalAmount: order.total_amount, items: order.order_items.map((item: any) => ({ id: item.id, productName: item.products.name, quantity: item.quantity, price: item.price })) }; return NextResponse.json(trackingData); } catch (error) { console.error('Erreur lors de la récupération du suivi:', error); return NextResponse.json( { error: "Erreur interne du serveur" }, { status: 500 } ); }
+}
+
+// Fonction utilitaire pour obtenir le message de statut
+function getStatusMessage(status: string): string { const statusMessages: Record<string, string> = { 'PENDING': 'Commande en attente de confirmation', 'CONFIRMED': 'Commande confirmée par le restaurant', 'PREPARING': 'Votre commande est en cours de préparation', 'READY': 'Votre commande est prête', 'OUT_FOR_DELIVERY': 'Votre commande est en cours de livraison', 'DELIVERED': 'Commande livrée avec succès', 'CANCELLED': 'Commande annulée' }; return statusMessages[status] || 'Statut inconnu';
+}
+
+// Endpoint pour mettre à jour le statut (pour les s)
+export async function PUT( request: NextRequest, { params }: { params: Promise<{ id: string }> }
+) { const { id } = await params; try { // Vérifier l'authentification const supabaseAuth = createRouteHandlerClient({ cookies }); const { data: { session }, error: authError } = await supabaseAuth.auth.getSession(); if (authError || !session?.user) { return NextResponse.json( { error: "Non autorisé" }, { status: 401 } ); } const orderId = id; const body = await request.json(); const { status, message, estimatedDelivery } = body; // Vérifier les permissions ( ou propriétaire de la commande) const { data: order, error: orderError } = await supabase .from('orders') .select('user_id, status') .eq('id', orderId) .single(); if (orderError || !order) { return NextResponse.json( { error: "Commande non trouvée" }, { status: 404 } ); } // Vérifier si l'utilisateur est admin ou propriétaire
+    const isOwner = order.user_id === session.user.id;
+    const isAdmin = session.user.user_metadata?.role === 'admin';
+    if (!isOwner && !isAdmin) { return NextResponse.json( { error: "Permissions insuffisantes" }, { status: 403 } ); } // Mettre à jour la commande const updateData: any = { updated_at: new Date().toISOString() }; if (status) { updateData.status = status; } if (estimatedDelivery) { updateData.estimated_delivery = estimatedDelivery; } const { error: updateError } = await supabase .from('orders') .update(updateData) .eq('id', orderId); if (updateError) { throw updateError; } // Créer une notification pour le changement if (status || message) { const { error: notificationError } = await supabase .from('order_notifications') .insert({ order_id: orderId, type: status ? 'status_change' : 'info', message: message || getStatusMessage(status), data: { old_status: order.status, new_status: status, from: isAdmin ? 'admin' : 'system' } }); if (notificationError) { console.error('Erreur lors de la création de la notification:', notificationError); } } return NextResponse.json({ success: true }); } catch (error) { console.error('Erreur lors de la mise à jour du suivi:', error); return NextResponse.json( { error: "Erreur interne du serveur" }, { status: 500 } ); }
+}

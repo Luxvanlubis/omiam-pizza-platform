@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-27T15:12:12.833Z",
+  "status": "FAILED",
+  "tests": [
+    {
+      "name": "Installation Docker",
+      "status": "FAILED",
+      "error": "Command failed: docker --version\n'docker' n'est pas reconnu en tant que commande interne\r\nou externe, un programme ex�cutable ou un fichier de commandes.\r\n"
+    }
+  ],
+  "buildMetrics": {},
+  "imageInfo": {},
+  "healthCheck": {},
+  "summary": {
+    "total": 1,
+    "success": 0,
+    "failed": 1,
+    "successRate": 0
+  }
+}

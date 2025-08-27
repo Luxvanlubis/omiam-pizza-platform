@@ -1,0 +1,111 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+/**
+ * 🏥 API Health Check - Supabase
+ * Endpoint pour vérifier la santé de la connexion Supabase
+ */
+    
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseService = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+export async function GET(request: NextRequest) {
+  try {
+    // Créer le client Supabase avec la clé de service
+    const supabase = createClient(supabaseUrl, supabaseService);
+    const startTime = Date.now();
+
+    // Test 1: Connexion de base
+    const { data: connection, error: connectionError } = await supabase
+      .from('products')
+      .select('count')
+      .limit(1);
+
+    if (connectionError) {
+      return NextResponse.json({
+        status: 'error',
+        message: 'Connexion Supabase échouée',
+        error: connectionError.message,
+        timestamp: new Date().toISOString()
+      }, { status: 500 });
+    }
+
+    // Test 2: Vérification des tables principales
+    const tables = ['users', 'products', 'orders', 'order_items', 'loyalty_transactions', 'reviews'];
+    const tableChecks = [];
+
+    for (const table of tables) {
+      try {
+        const { data, error } = await supabase
+          .from(table)
+          .select('count')
+          .limit(1);
+        
+        tableChecks.push({
+          table,
+          status: error ? 'error' : 'ok',
+          error: error?.message
+        });
+      } catch (err) {
+        tableChecks.push({
+          table,
+          status: 'error',
+          error: err instanceof Error ? err.message : 'Unknown error'
+        });
+      }
+    }
+
+    // Test 3: Vérification des politiques RLS
+    let rlsStatus = 'unknown';
+    try {
+      const { data: rlsData, error: rlsError } = await supabase
+        .rpc('check_rls_status')
+        .catch(() => ({ data: null, error: 'RPC not available' }));
+      
+      rlsStatus = rlsError ? 'error' : 'ok';
+    } catch {
+      rlsStatus = 'skip';
+    }
+
+    // Test 4: Performance
+    const responseTime = Date.now() - startTime;
+
+    // Calculer le statut global
+    const hasErrors = tableChecks.some(check => check.status === 'error');
+    const globalStatus = hasErrors ? 'warning' : 'healthy';
+
+    return NextResponse.json({
+      status: globalStatus,
+      message: globalStatus === 'healthy' ? 'Supabase fonctionne correctement' : 'Problèmes détectés',
+      checks: {
+        connection: 'ok',
+        tables: tableChecks,
+        rls: rlsStatus,
+        performance: {
+          responseTime: `${responseTime}ms`,
+          status: responseTime < 1000 ? 'good' : responseTime < 3000 ? 'acceptable' : 'slow'
+        }
+      },
+      metadata: {
+        supabaseUrl: supabaseUrl.replace(/\/\/.*@/, '//***@'), // Masquer les credentials
+        timestamp: new Date().toISOString(),
+        version: '1.0.0'
+      }
+    });
+  } catch (error) {
+    console.error('Health check error:', error);
+    return NextResponse.json({
+      status: 'error',
+      message: 'Erreur lors du health check',
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    }, { status: 500 });
+  }
+}
+
+export async function POST(request: NextRequest) {
+  return NextResponse.json(
+    { message: 'Utilisez GET pour le health check' },
+    { status: 405 }
+  );
+}

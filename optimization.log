@@ -1,0 +1,43 @@
+[2025-08-25T01:20:42.731Z] 🚀 Démarrage optimisation projet...
+[2025-08-25T01:20:42.742Z] 🔧 Réparation package-lock.json...
+[2025-08-25T01:20:42.750Z] 📦 Backup créé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\backup-1756084842730\package-lock.json.backup
+[2025-08-25T01:20:42.766Z] ✅ Corrigé 1058 occurrences: /([^"\s]):/g
+[2025-08-25T01:20:42.776Z] ❌ JSON toujours invalide après corrections: Expected ',' or '}' after property value in JSON at position 3694 (line 1 column 3695)
+[2025-08-25T01:20:42.781Z] ⚠️ Tentative de régénération complète...
+[2025-08-25T01:20:42.783Z] 🔄 Régénération package-lock.json...
+[2025-08-25T01:20:42.785Z] 🗑️ Suppression node_modules...
+[2025-08-25T01:21:54.588Z] 📦 Réinstallation dépendances...
+[2025-08-25T01:24:24.728Z] ❌ Erreur lors de la régénération: Command failed: npm install
+[2025-08-25T01:24:24.730Z] 🧹 Nettoyage fichiers temporaires...
+[2025-08-25T01:24:24.791Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\debug-json-190634.js
+[2025-08-25T01:24:24.793Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\debug-json-99064.js
+[2025-08-25T01:24:24.794Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\debug-package-lock.js
+[2025-08-25T01:24:24.865Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\fix-json-99064.js
+[2025-08-25T01:24:24.869Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\fix-json-error.js
+[2025-08-25T01:24:24.872Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\fix-tests.js
+[2025-08-25T01:24:24.873Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\scripts\fix-critical-security-issues.js
+[2025-08-25T01:24:24.875Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\scripts\fix-remaining-security-issues.js
+[2025-08-25T01:24:24.876Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\scripts\fix-security-vulnerabilities.js
+[2025-08-25T01:24:24.976Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\find-json-error.js
+[2025-08-25T01:24:25.065Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\scripts\test-stripe-webhooks.js
+[2025-08-25T01:24:25.067Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-admin-complete.js
+[2025-08-25T01:24:25.074Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-admin-corrected.js
+[2025-08-25T01:24:25.078Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-admin-crud.js
+[2025-08-25T01:24:25.080Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-admin-final.js
+[2025-08-25T01:24:25.085Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-admin-links-manual.js
+[2025-08-25T01:24:25.090Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-admin-modules-complete.js
+[2025-08-25T01:24:25.091Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-api-direct.js
+[2025-08-25T01:24:25.093Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-api-simple.js
+[2025-08-25T01:24:25.095Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-auth-simple.js
+[2025-08-25T01:24:25.096Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-auth-supabase.js
+[2025-08-25T01:24:25.097Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-connection.js
+[2025-08-25T01:24:25.099Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-db-connection.js
+[2025-08-25T01:24:25.106Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-prisma-simple.js
+[2025-08-25T01:24:25.109Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\test-rls-security.js
+[2025-08-25T01:24:25.116Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\webhook-test-report.json
+[2025-08-25T01:24:25.227Z] 🗑️ Supprimé: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\quick-test.js
+[2025-08-25T01:24:25.579Z] ✅ 27 fichiers temporaires nettoyés
+[2025-08-25T01:24:25.581Z] 📁 Optimisation structure projet...
+[2025-08-25T01:24:25.583Z] ✅ Fichier .traeai-ignore créé
+[2025-08-25T01:24:25.585Z] ✅ Optimisation terminée avec succès!
+[2025-08-25T01:24:25.586Z] 📊 Logs sauvegardés dans: F:\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\optimization.log

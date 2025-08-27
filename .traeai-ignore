@@ -1,0 +1,11 @@
+# Fichiers à ignorer pour réduire la taille des prompts
+node_modules/
+.next/
+coverage/
+*.log
+debug-*.js
+fix-*.js
+test-*.js
+backup-*/
+.swc/
+tsconfig.tsbuildinfo

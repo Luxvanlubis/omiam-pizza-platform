@@ -1,0 +1,4 @@
+async function globalTeardown() { console.log('🧹 Starting global teardown for E2E s...'); // Nettoyage des données de console.log('🗑️ Cleaning up  data...'); // Ici on pourrait: // - Supprimer les utilisateurs de  créés // - Nettoyer la base de données de // - Fermer les connexions externes // - Supprimer les fichiers temporaires try { // Exemple de nettoyage // await cleanupDatabase(); // await removeFiles(); console.log('✅ Global teardown completed successfully'); } catch (error) { console.error('❌ Error during global teardown:', error); // Ne pas faire échouer les s à cause du teardown }
+}
+
+export default globalTeardown;

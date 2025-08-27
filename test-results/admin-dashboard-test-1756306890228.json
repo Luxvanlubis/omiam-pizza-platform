@@ -1,0 +1,80 @@
+{
+  "timestamp": "2025-08-27T15:01:24.673Z",
+  "status": "PASSED",
+  "tests": [
+    {
+      "name": "Accès Dashboard Admin",
+      "status": "PASSED",
+      "duration": 4208,
+      "details": {
+        "loadTime": "4208ms",
+        "title": "O'MIAM - Pizzeria Artisanale",
+        "elements": {
+          "header": false,
+          "navigation": false,
+          "statsCards": 0,
+          "charts": 3,
+          "tables": 0,
+          "buttons": 2
+        }
+      }
+    },
+    {
+      "name": "Composants Analytics",
+      "status": "PASSED",
+      "details": {
+        "components": {
+          "realTimeMetrics": 0,
+          "kpiCards": 0,
+          "charts": 0,
+          "tables": 0,
+          "filters": 0,
+          "tabs": 0
+        },
+        "hasData": {
+          "numbers": false,
+          "percentages": false,
+          "currency": true,
+          "dates": false
+        }
+      }
+    },
+    {
+      "name": "Navigation Modules Admin",
+      "status": "PASSED",
+      "details": {
+        "modules": [],
+        "testedModules": 0
+      }
+    },
+    {
+      "name": "Métriques de Performance",
+      "status": "PASSED",
+      "details": {
+        "domContentLoaded": 0.09999996423721313,
+        "loadComplete": 0,
+        "firstPaint": 1736,
+        "firstContentfulPaint": 1736,
+        "jsHeapUsed": 37811060
+      }
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "warnings": 0
+  },
+  "performance": {
+    "dashboardLoad": 4208,
+    "domContentLoaded": 0.09999996423721313,
+    "loadComplete": 0,
+    "firstPaint": 1736,
+    "firstContentfulPaint": 1736,
+    "jsHeapUsed": 37811060,
+    "jsHeapTotal": 43413504
+  },
+  "screenshots": [
+    "F:\\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\\test-results\\dashboard-1756306889862.png"
+  ]
+}

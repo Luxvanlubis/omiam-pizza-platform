@@ -1,0 +1,214 @@
+/* Optimisation des animations et transitions pour la performance */
+
+/* Désactiver les animations pour les utilisateurs qui préfèrent le mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimisation des animations avec will-change */
+.optimized-card {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Animations optimisées avec GPU acceleration */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Classes d'animation optimisées */
+.animate-slide-in {
+  animation: slideInUp 0.6s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  will-change: opacity;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+/* Transitions optimisées */
+.optimized-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* Optimisation des hover effects */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Optimisation des images avec placeholder */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.image-container img {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Loading skeleton optimisé */
+.skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Optimisation du scroll */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Performance des cards */
+.performance-card {
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+/* Optimisation des boutons */
+.optimized-button {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: all 0.2s ease;
+  will-change: transform, background-color;
+}
+
+.optimized-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  will-change: width, height;
+}
+
+.optimized-button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Optimisation pour le mobile */
+@media (max-width: 768px) {
+  .animate-slide-in,
+  .animate-fade-in,
+  .animate-scale-in {
+    animation-duration: 0.4s;
+  }
+  
+  .optimized-transition {
+    transition-duration: 0.2s;
+  }
+}
+
+/* Désactiver les transitions sur les appareils bas de gamme */
+@media (hover: none) {
+  .hover-lift:hover {
+    transform: none;
+  }
+  
+  .image-container:hover img {
+    transform: none;
+  }
+}
+
+/* Optimisation du text rendering */
+.optimize-text {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1;
+}
+
+/* Performance des tabs */
+.tab-content {
+  contain: layout style;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Optimisation des formulaires */
+.form-field {
+  contain: layout style;
+}
+
+/* Performance des modals */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  will-change: opacity;
+}
+
+.modal-content {
+  contain: layout style paint;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}

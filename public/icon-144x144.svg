@@ -1,0 +1,10 @@
+<svg width="144" height="144" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="144" height="144" rx="18" fill="#dc2626"/>
+  <circle cx="72" cy="72" r="54" fill="#fef3c7"/>
+  <text x="72" y="80" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#dc2626">O'M</text>
+  <circle cx="58" cy="58" r="6" fill="#dc2626"/>
+  <circle cx="86" cy="58" r="6" fill="#dc2626"/>
+  <circle cx="72" cy="88" r="4" fill="#dc2626"/>
+  <circle cx="64" cy="94" r="3" fill="#dc2626"/>
+  <circle cx="80" cy="94" r="3" fill="#dc2626"/>
+</svg>

@@ -1,0 +1,5 @@
+import { Card, CardContent } from '@/components/ui/card';
+import { Loader2, Pizza } from 'lucide-react';
+
+export default function Loading() { return ( <div className="min-h-screen bg-background flex items-center justify-center p-4"> <Card className="w-full max-w-md"> <CardContent className="flex flex-col items-center justify-center p-8 space-y-4"> <div className="relative"> <Pizza className="h-12 w-12 text-red-600" /> <Loader2 className="h-6 w-6 text-red-400 animate-spin absolute -top-1 -right-1" /> </div> <div className="text-center space-y-2"> <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100"> Chargement en cours... </h3> <p className="text-sm text-gray-600 dark:text-gray-400"> Préparation de votre expérience O'Miam </p> </div> <div className="flex space-x-1"> <div className="w-2 h-2 bg-red-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div> <div className="w-2 h-2 bg-red-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div> <div className="w-2 h-2 bg-red-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div> </div> </CardContent> </Card> </div> );
+}

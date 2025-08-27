@@ -1,0 +1,292 @@
+{
+  "timestamp": "2025-08-25T23:52:27.814Z",
+  "project": "O'Miam Pizza Restaurant",
+  "supabase_url": "https://bnjmxkjpngvkmelhknjv.supabase.co",
+  "tables": {
+    "products": {
+      "count": 12,
+      "data": [
+        {
+          "id": "08ac8523-3c6a-44d3-a821-5eed40d59faf",
+          "name": "Pizza Margherita",
+          "description": "Pizza classique avec tomate, mozzarella et basilic frais",
+          "price": 12.9,
+          "category": "pizzas",
+          "image_url": "/images/pizza-margherita.jpg",
+          "available": true,
+          "ingredients": [
+            "tomate",
+            "mozzarella",
+            "basilic",
+            "huile d'olive"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "f181c344-5ef0-4758-be76-c3cdecebacbb",
+          "name": "Pizza Pepperoni",
+          "description": "Pizza avec sauce tomate, mozzarella et pepperoni",
+          "price": 15.9,
+          "category": "pizzas",
+          "image_url": "/images/pizza-pepperoni.jpg",
+          "available": true,
+          "ingredients": [
+            "tomate",
+            "mozzarella",
+            "pepperoni"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "69cadccd-44dc-4908-b71e-506aae379670",
+          "name": "Pizza Quattro Stagioni",
+          "description": "Pizza aux quatre saisons avec champignons, jambon, artichauts et olives",
+          "price": 17.9,
+          "category": "pizzas",
+          "image_url": "/images/pizza-quattro.jpg",
+          "available": true,
+          "ingredients": [
+            "tomate",
+            "mozzarella",
+            "champignons",
+            "jambon",
+            "artichauts",
+            "olives"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "e5b56fc6-facd-4beb-a011-7bde082ecb42",
+          "name": "Pizza Végétarienne",
+          "description": "Pizza avec légumes grillés et fromage de chèvre",
+          "price": 16.9,
+          "category": "pizzas",
+          "image_url": "/images/pizza-vegetarienne.jpg",
+          "available": true,
+          "ingredients": [
+            "tomate",
+            "courgettes",
+            "aubergines",
+            "poivrons",
+            "fromage de chèvre"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "319d74a8-b4bb-461f-a54f-c582ae7b5612",
+          "name": "Calzone Classique",
+          "description": "Pizza fermée avec jambon, champignons et mozzarella",
+          "price": 14.9,
+          "category": "pizzas",
+          "image_url": "/images/calzone.jpg",
+          "available": true,
+          "ingredients": [
+            "tomate",
+            "jambon",
+            "champignons",
+            "mozzarella"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "a8e63624-27ff-4dec-b4ec-7ad2ff7deeae",
+          "name": "Salade César",
+          "description": "Salade romaine, croûtons, parmesan et sauce César",
+          "price": 9.9,
+          "category": "salades",
+          "image_url": "/images/salade-cesar.jpg",
+          "available": true,
+          "ingredients": [
+            "salade romaine",
+            "croûtons",
+            "parmesan",
+            "sauce césar"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose",
+            "œufs"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "a30f110d-f274-41c4-bdd6-f81788001434",
+          "name": "Salade Méditerranéenne",
+          "description": "Salade mixte avec tomates, olives, feta et vinaigrette",
+          "price": 11.9,
+          "category": "salades",
+          "image_url": "/images/salade-mediterraneenne.jpg",
+          "available": true,
+          "ingredients": [
+            "salade mixte",
+            "tomates",
+            "olives",
+            "feta",
+            "concombre"
+          ],
+          "allergens": [
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "48ad8d26-5966-4247-a311-66f737a80134",
+          "name": "Tiramisu",
+          "description": "Dessert italien traditionnel au café et mascarpone",
+          "price": 6.9,
+          "category": "desserts",
+          "image_url": "/images/tiramisu.jpg",
+          "available": true,
+          "ingredients": [
+            "mascarpone",
+            "café",
+            "biscuits",
+            "cacao"
+          ],
+          "allergens": [
+            "gluten",
+            "lactose",
+            "œufs"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "cd776297-8ab5-41ce-a928-40ea6d1f160d",
+          "name": "Panna Cotta",
+          "description": "Dessert crémeux aux fruits rouges",
+          "price": 5.9,
+          "category": "desserts",
+          "image_url": "/images/panna-cotta.jpg",
+          "available": true,
+          "ingredients": [
+            "crème",
+            "fruits rouges",
+            "gélatine"
+          ],
+          "allergens": [
+            "lactose"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "6876ab19-998f-498c-bc86-c34c9b1e2696",
+          "name": "Coca-Cola",
+          "description": "Boisson gazeuse 33cl",
+          "price": 2.5,
+          "category": "boissons",
+          "image_url": "/images/coca-cola.jpg",
+          "available": true,
+          "ingredients": [
+            "eau gazéifiée",
+            "sucre",
+            "caféine"
+          ],
+          "allergens": [],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "e6330d28-d316-4092-92c3-5cd31535bcae",
+          "name": "Eau Minérale",
+          "description": "Eau minérale naturelle 50cl",
+          "price": 1.9,
+          "category": "boissons",
+          "image_url": "/images/eau-minerale.jpg",
+          "available": true,
+          "ingredients": [
+            "eau minérale"
+          ],
+          "allergens": [],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        },
+        {
+          "id": "70ff8df3-4272-498f-a88a-23822e93e164",
+          "name": "Bière Artisanale",
+          "description": "Bière blonde artisanale 33cl",
+          "price": 4.5,
+          "category": "boissons",
+          "image_url": "/images/biere-artisanale.jpg",
+          "available": true,
+          "ingredients": [
+            "malt",
+            "houblon",
+            "levure"
+          ],
+          "allergens": [
+            "gluten"
+          ],
+          "created_at": "2025-08-21T20:39:37.461929+00:00",
+          "updated_at": "2025-08-21T20:39:37.461929+00:00"
+        }
+      ],
+      "schema": [
+        "id",
+        "name",
+        "description",
+        "price",
+        "category",
+        "image_url",
+        "available",
+        "ingredients",
+        "allergens",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "users": {
+      "count": 0,
+      "data": [],
+      "schema": []
+    },
+    "orders": {
+      "count": 0,
+      "data": [],
+      "schema": []
+    },
+    "order_items": {
+      "count": 0,
+      "data": [],
+      "schema": []
+    },
+    "loyalty_transactions": {
+      "count": 0,
+      "data": [],
+      "schema": []
+    },
+    "reviews": {
+      "count": 0,
+      "data": [],
+      "schema": []
+    }
+  }
+}

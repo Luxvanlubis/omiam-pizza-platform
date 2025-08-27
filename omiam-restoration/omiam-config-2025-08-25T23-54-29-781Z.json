@@ -1,0 +1,215 @@
+{
+  "name": "O'Miam Pizza Restaurant",
+  "description": "Restaurant de pizzas artisanales avec système de commande en ligne",
+  "features": [
+    "🍕 Menu de pizzas artisanales",
+    "🛒 Système de commande en ligne",
+    "👥 Gestion des utilisateurs",
+    "📊 Tableau de bord administrateur",
+    "🎯 Programme de fidélité",
+    "⭐ Système d'avis clients",
+    "📱 Interface responsive",
+    "🔒 Authentification sécurisée"
+  ],
+  "supabase": {
+    "url": "https://bnjmxkjpngvkmelhknjv.supabase.co",
+    "anonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuam14a2pwbmd2a21lbGhrbmp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4MDM1MTYsImV4cCI6MjA3MTM3OTUxNn0.TniMbYBqrngNZ08QpvuQ8MylgU85kin7sVn68hf-S8g",
+    "serviceKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuam14a2pwbmd2a21lbGhrbmp2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTgwMzUxNiwiZXhwIjoyMDcxMzc5NTE2fQ.F5d5kZ3Q81tQeFfoFCKHGqHUEQ196xgXblR8ZxV8dnU"
+  },
+  "menu": {
+    "pizzas": [
+      {
+        "name": "Pizza Margherita",
+        "description": "Pizza classique avec tomate, mozzarella et basilic frais",
+        "price": 12.9,
+        "ingredients": [
+          "tomate",
+          "mozzarella",
+          "basilic",
+          "huile d'olive"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose"
+        ],
+        "image_url": "/images/pizza-margherita.jpg"
+      },
+      {
+        "name": "Pizza Pepperoni",
+        "description": "Pizza avec sauce tomate, mozzarella et pepperoni",
+        "price": 15.9,
+        "ingredients": [
+          "tomate",
+          "mozzarella",
+          "pepperoni"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose"
+        ],
+        "image_url": "/images/pizza-pepperoni.jpg"
+      },
+      {
+        "name": "Pizza Quattro Stagioni",
+        "description": "Pizza aux quatre saisons avec champignons, jambon, artichauts et olives",
+        "price": 17.9,
+        "ingredients": [
+          "tomate",
+          "mozzarella",
+          "champignons",
+          "jambon",
+          "artichauts",
+          "olives"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose"
+        ],
+        "image_url": "/images/pizza-quattro-stagioni.jpg"
+      },
+      {
+        "name": "Pizza Végétarienne",
+        "description": "Pizza avec légumes grillés et fromage de chèvre",
+        "price": 16.9,
+        "ingredients": [
+          "tomate",
+          "courgettes",
+          "aubergines",
+          "poivrons",
+          "fromage de chèvre"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose"
+        ],
+        "image_url": "/images/pizza-vegetarienne.jpg"
+      },
+      {
+        "name": "Calzone Classique",
+        "description": "Pizza fermée avec jambon, champignons et mozzarella",
+        "price": 14.9,
+        "ingredients": [
+          "tomate",
+          "mozzarella",
+          "jambon",
+          "champignons"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose"
+        ],
+        "image_url": "/images/calzone-classique.jpg"
+      }
+    ],
+    "salades": [
+      {
+        "name": "Salade César",
+        "description": "Salade romaine, croûtons, parmesan et sauce César",
+        "price": 9.9,
+        "ingredients": [
+          "salade romaine",
+          "croûtons",
+          "parmesan",
+          "sauce césar"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose",
+          "œufs"
+        ],
+        "image_url": "/images/salade-cesar.jpg"
+      },
+      {
+        "name": "Salade Méditerranéenne",
+        "description": "Salade mixte avec tomates, olives, feta et vinaigrette",
+        "price": 11.9,
+        "ingredients": [
+          "salade mixte",
+          "tomates",
+          "olives",
+          "feta",
+          "vinaigrette"
+        ],
+        "allergens": [
+          "lactose"
+        ],
+        "image_url": "/images/salade-mediterraneenne.jpg"
+      }
+    ],
+    "desserts": [
+      {
+        "name": "Tiramisu",
+        "description": "Dessert italien traditionnel au café et mascarpone",
+        "price": 6.9,
+        "ingredients": [
+          "mascarpone",
+          "café",
+          "biscuits",
+          "cacao"
+        ],
+        "allergens": [
+          "gluten",
+          "lactose",
+          "œufs"
+        ],
+        "image_url": "/images/tiramisu.jpg"
+      },
+      {
+        "name": "Panna Cotta",
+        "description": "Dessert crémeux aux fruits rouges",
+        "price": 5.9,
+        "ingredients": [
+          "crème",
+          "gélatine",
+          "fruits rouges"
+        ],
+        "allergens": [
+          "lactose"
+        ],
+        "image_url": "/images/panna-cotta.jpg"
+      }
+    ],
+    "boissons": [
+      {
+        "name": "Coca-Cola",
+        "description": "Boisson gazeuse 33cl",
+        "price": 2.5,
+        "ingredients": [
+          "eau gazéifiée",
+          "sucre",
+          "arômes"
+        ],
+        "allergens": [],
+        "image_url": "/images/coca-cola.jpg"
+      },
+      {
+        "name": "Eau Minérale",
+        "description": "Eau minérale naturelle 50cl",
+        "price": 1.9,
+        "ingredients": [
+          "eau minérale"
+        ],
+        "allergens": [],
+        "image_url": "/images/eau-minerale.jpg"
+      },
+      {
+        "name": "Bière Artisanale",
+        "description": "Bière blonde artisanale 33cl",
+        "price": 4.5,
+        "ingredients": [
+          "malt",
+          "houblon",
+          "levure"
+        ],
+        "allergens": [
+          "gluten"
+        ],
+        "image_url": "/images/biere-artisanale.jpg"
+      }
+    ]
+  },
+  "database_status": {
+    "products": 12,
+    "timestamp": "2025-08-25T23:54:29.782Z"
+  }
+}

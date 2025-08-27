@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-27T14:56:40.307Z",
+  "status": "COMPLIANT",
+  "stripe_keys": true,
+  "stripe_connection": true,
+  "pci_compliance": {
+    "issues": [],
+    "warnings": [
+      "Fichier non trouvé: src/app/api/stripe/webhook/route.ts",
+      "Fichier non trouvé: src/app/api/payments/route.ts",
+      "Fichier non trouvé: src/components/checkout/CheckoutForm.tsx",
+      "Configuration HTTPS/HSTS manquante dans next.config.js"
+    ]
+  },
+  "recommendations": [
+    "Examiner les avertissements de sécurité"
+  ]
+}

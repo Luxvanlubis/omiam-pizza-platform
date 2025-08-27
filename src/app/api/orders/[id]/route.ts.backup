@@ -1,0 +1,83 @@
+
+import { NextRequest, NextResponse } from 'next/server';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { supabaseIntegrationService } from '../../../../lib/supabase-integration-service';
+import { OrderNotificationMiddleware } from '../../../../lib/order-notification-middleware';
+import path from 'path';
+
+/**
+ * Valide et sécurise un chemin de fichier
+ * @param {string} userPath - Chemin fourni par l'utilisateur
+ * @param {string} basePath - Chemin de base autorisé
+ * @returns {string} - Chemin sécurisé
+ */
+function validateSecurePath(userPath: string, basePath: string = process.cwd()): string {
+  if (!userPath || typeof userPath !== 'string') {
+    throw new Error('Chemin invalide');
+  }
+  // Normaliser le chemin et vérifier qu'il reste dans le répertoire autorisé
+  const normalizedPath = path.normalize(path.join(basePath, userPath));
+  const normalizedBase = path.normalize(basePath);
+  if (!normalizedPath.startsWith(normalizedBase)) {
+    throw new Error('Accès au chemin non autorisé');
+  }
+  return normalizedPath;
+}
+
+// Interface pour la mise à jour de commande
+interface UpdateOrderRequest {
+  status?: 'PENDING' | 'CONFIRMED' | 'PREPARING' | 'READY' | 'OUT_FOR_DELIVERY' | 'DELIVERED' | 'CANCELLED';
+  estimatedDelivery?: string;
+  customerNotes?: string;
+  Notes?: string;
+  notifyCustomer?: boolean;
+}
+
+// Récupérer une commande spécifique
+export async function GET( request: NextRequest, { params }: { params: Promise<{ id: string }> }
+) { const { id } = await params; try { const supabase = createRouteHandlerClient({ cookies }); const { data: { session }, error: authError } = await supabase.auth.getSession(); if (authError || !session?.user) { return NextResponse.json( { error: 'Authentification requise' }, { status: 401 } ); } const orderId = id; // Récupérer la commande const { data: order, error: orderError } = await supabaseIntegrationService.getSupabaseClient() .from('orders') .select(` *, order_items ( id, quantity, price, customizations, products ( id, name, description, price, image_url ) ), profiles ( id, full_name, email, phone ), notifications ( id, type, title, message, is_read, created_at ) `) .eq('id', orderId) .eq('user_id', session.user.id) .order('created_at', { referencedTable: 'notifications', ascending: false }) .limit(10, { referencedTable: 'notifications' }) .single(); if (orderError || !order) { return NextResponse.json( { error: 'Commande non trouvée' }, { status: 404 } ); } // Parser les données JSON const orderWithParsedData = { ...order, delivery_address: order.delivery_address ? JSON.parse(order.delivery_address) : null, items: order.order_items?.map(item => ({ ...item, customizations: item.customizations ? JSON.parse(item.customizations) : {}, product: item.products })) || [], user: order.profiles }; return NextResponse.json({ order: orderWithParsedData }); } catch (error) { console.error('Erreur lors de la récupération de la commande:', error instanceof Error ? error.message : String(error)); return NextResponse.json( { error: 'Erreur interne du serveur' }, { status: 500 } ); }
+}
+
+// Mettre à jour une commande
+export async function PUT( request: NextRequest, { params }: { params: Promise<{ id: string }> }
+) { const { id } = await params; try { const supabase = createRouteHandlerClient({ cookies }); const { data: { session }, error: authError } = await supabase.auth.getSession(); if (authError || !session?.user) { return NextResponse.json( { error: 'Authentification requise' }, { status: 401 } ); } const orderId = id; const body: UpdateOrderRequest = await request.json(); // Vérifier que la commande existe const { data: existingOrder, error: orderError } = await supabaseIntegrationService.getSupabaseClient() .from('orders') .select(` *, profiles ( id, full_name, email, role ) `) .eq('id', orderId) .single(); if (orderError || !existingOrder) { return NextResponse.json( { error: 'Commande non trouvée' }, { status: 404 } ); } // Vérifier les permissions
+    const isOwner = existingOrder.user_id === session.user.id;
+    const isAdmin = session.user.user_metadata?.role === 'admin';
+    if (!isOwner && !isAdmin) {
+      return NextResponse.json(
+        { error: 'Non autorisé' },
+        { status: 403 }
+      );
+    }
+
+    // Les clients ne peuvent modifier que certains champs
+    if (isOwner && !isAdmin) {
+      const allowedFields = ['customerNotes'];
+      const requestedFields = Object.keys(body); const unauthorizedFields = requestedFields.filter(field => !allowedFields.includes(field)); if (unauthorizedFields.length > 0) { return NextResponse.json( { error: `Champs non autorisés: ${unauthorizedFields.join(', ')}` }, { status: 403 } ); } } // Préparer les données de mise à jour
+    const updateData: any = {};
+    if (body.status && isAdmin) {
+      updateData.status = body.status;
+    }
+    if (body.estimatedDelivery && isAdmin) {
+      updateData.estimated_delivery = new Date(body.estimatedDelivery).toISOString();
+    }
+    if (body.customerNotes !== undefined) {
+      updateData.customer_notes = body.customerNotes;
+    }
+    if (body.Notes !== undefined && isAdmin) {
+      updateData.admin_notes = body.Notes;
+    } // Mettre à jour la commande const { data: updatedOrder, error: updateError } = await supabaseIntegrationService.getSupabaseClient() .from('orders') .update(updateData) .eq('id', orderId) .select(` *, order_items ( id, quantity, price, customizations, products ( id, name, description, price, image_url ) ), profiles ( id, full_name, email, phone ) `) .single(); if (updateError || !updatedOrder) { return NextResponse.json( { error: 'Erreur lors de la mise à jour' }, { status: 500 } ); } // Envoyer les notifications si le statut a changé if (body.status && body.status !== existingOrder.status && (body.notifyCustomer !== false)) { try { await OrderNotificationMiddleware.handleOrderStatusChange({ orderId, previousStatus: existingOrder.status, newStatus: body.status, userId: existingOrder.user_id, metadata: { updatedBy: session.user.id, updatedByRole: session.user.user_metadata?.role, Notes: body.Notes } }); // Notification en temps réel gérée par OrderNotificationMiddleware } catch (notificationError) { console.error('Erreur lors de l\'envoi des notifications:', notificationError); // Ne pas faire échouer la mise à jour } } // Parser les données JSON pour la réponse const orderWithParsedData = { ...updatedOrder, delivery_address: updatedOrder.delivery_address ? JSON.parse(updatedOrder.delivery_address) : null, items: updatedOrder.order_items?.map(item => ({ ...item, product: item.products, customizations: item.customizations ? JSON.parse(item.customizations) : {} })) || [], user: updatedOrder.profiles }; return NextResponse.json(orderWithParsedData); } catch (error) { console.error('Erreur lors de la mise à jour de la commande:', error); return NextResponse.json( { error: 'Erreur interne du serveur' }, { status: 500 } ); }
+}
+
+// Supprimer une commande
+export async function DELETE( request: NextRequest, { params }: { params: Promise<{ id: string }> }
+) { const { id } = await params; try { const supabase = createRouteHandlerClient({ cookies }); const { data: { session }, error: authError } = await supabase.auth.getSession(); if (authError || !session?.user) { return NextResponse.json( { error: 'Authentification requise' }, { status: 401 } ); } const orderId = id;
+    const isAdmin = session.user.user_metadata?.role === 'admin';
+    if (!isAdmin) {
+      return NextResponse.json(
+        { error: 'Seuls les administrateurs peuvent supprimer des commandes' },
+        { status: 403 }
+      );
+    } // Supprimer la commande (cascade supprimera les items) const { error: deleteError } = await supabaseIntegrationService.getSupabaseClient() .from('orders') .delete() .eq('id', orderId); if (deleteError) { return NextResponse.json( { error: 'Erreur lors de la suppression' }, { status: 500 } ); } return NextResponse.json({ message: 'Commande supprimée avec succès' }); } catch (error) { console.error('Erreur lors de la suppression de la commande:', error); return NextResponse.json( { error: 'Erreur interne du serveur' }, { status: 500 } ); }
+}

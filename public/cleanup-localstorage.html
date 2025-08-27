@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nettoyage localStorage - OMIAM</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+        .info { color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Nettoyage localStorage - OMIAM</h1>
+        <p>Cet outil permet de nettoyer les données localStorage corrompues qui peuvent causer des erreurs JSON.</p>
+        
+        <div>
+            <button class="btn" onclick="analyzeLocalStorage()">📊 Analyser localStorage</button>
+            <button class="btn" onclick="cleanCorruptedData()">🧹 Nettoyer données corrompues</button>
+            <button class="btn btn-danger" onclick="clearAllOmiamData()">🗑️ Supprimer toutes les données OMIAM</button>
+        </div>
+        
+        <div id="log" class="log"></div>
+    </div>
+
+    <script>
+        const KEYS_TO_CHECK = [
+            'omiam-cookie-consent',
+            'omiam-cookie-preferences',
+            'omiam_last_sync',
+            'omiam_offline_actions',
+            'cart-items',
+            'user-preferences',
+            'menu-cache',
+            'offline-menu',
+            'notifications',
+            'push-subscription',
+            'i18n-lang',
+            'theme-preference',
+            'gdpr-consent'
+        ];
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : 'info';
+            logDiv.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+
+        function analyzeLocalStorage() {
+            clearLog();
+            log('🔍 Analyse du localStorage...', 'info');
+            
+            let totalItems = 0;
+            let corruptedItems = 0;
+            let omiamItems = 0;
+            
+            // Analyser toutes les clés
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                totalItems++;
+                
+                if (key.startsWith('omiam') || key.startsWith('OMIAM')) {
+                    omiamItems++;
+                }
+                
+                // Tenter de parser les valeurs qui ressemblent à du JSON
+                if (value && (value.startsWith('{') || value.startsWith('[') || value.startsWith('"'))) {
+                    try {
+                        JSON.parse(value);
+                        log(`✅ ${key}: JSON valide`, 'success');
+                    } catch (error) {
+                        log(`❌ ${key}: JSON corrompu - ${error.message}`, 'error');
+                        corruptedItems++;
+                    }
+                } else {
+                    log(`ℹ️ ${key}: Valeur simple (${typeof value})`, 'info');
+                }
+            }
+            
+            log(`\n📊 Résumé:`, 'info');
+            log(`   - Total d'éléments: ${totalItems}`, 'info');
+            log(`   - Éléments OMIAM: ${omiamItems}`, 'info');
+            log(`   - Éléments corrompus: ${corruptedItems}`, corruptedItems > 0 ? 'warning' : 'success');
+        }
+
+        function cleanCorruptedData() {
+            clearLog();
+            log('🧹 Nettoyage des données corrompues...', 'info');
+            
+            let clearedCount = 0;
+            const keysToRemove = [];
+            
+            // Identifier les clés corrompues
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                
+                if (value && (value.startsWith('{') || value.startsWith('[') || value.startsWith('"'))) {
+                    try {
+                        JSON.parse(value);
+                    } catch (error) {
+                        keysToRemove.push(key);
+                        log(`🗑️ Marqué pour suppression: ${key}`, 'warning');
+                    }
+                }
+            }
+            
+            // Supprimer les clés corrompues
+            keysToRemove.forEach(key => {
+                try {
+                    localStorage.removeItem(key);
+                    clearedCount++;
+                    log(`✅ Supprimé: ${key}`, 'success');
+                } catch (error) {
+                    log(`❌ Erreur lors de la suppression de ${key}: ${error.message}`, 'error');
+                }
+            });
+            
+            log(`\n🎉 Nettoyage terminé: ${clearedCount} éléments supprimés`, 'success');
+            
+            if (clearedCount > 0) {
+                log('🔄 Rechargez la page pour appliquer les changements.', 'info');
+            }
+        }
+
+        function clearAllOmiamData() {
+            if (!confirm('⚠️ Êtes-vous sûr de vouloir supprimer toutes les données OMIAM ? Cette action est irréversible.')) {
+                return;
+            }
+            
+            clearLog();
+            log('🗑️ Suppression de toutes les données OMIAM...', 'warning');
+            
+            let clearedCount = 0;
+            const keysToRemove = [];
+            
+            // Identifier toutes les clés OMIAM
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('omiam') || key.startsWith('OMIAM') || KEYS_TO_CHECK.includes(key)) {
+                    keysToRemove.push(key);
+                }
+            }
+            
+            // Supprimer toutes les clés OMIAM
+            keysToRemove.forEach(key => {
+                try {
+                    localStorage.removeItem(key);
+                    clearedCount++;
+                    log(`✅ Supprimé: ${key}`, 'success');
+                } catch (error) {
+                    log(`❌ Erreur lors de la suppression de ${key}: ${error.message}`, 'error');
+                }
+            });
+            
+            log(`\n🎉 Suppression terminée: ${clearedCount} éléments supprimés`, 'success');
+            log('🔄 Rechargez la page pour appliquer les changements.', 'info');
+        }
+
+        // Analyser automatiquement au chargement
+        window.addEventListener('load', () => {
+            log('🚀 Outil de nettoyage localStorage chargé', 'info');
+            log('💡 Cliquez sur "Analyser localStorage" pour commencer', 'info');
+        });
+    </script>
+</body>
+</html>

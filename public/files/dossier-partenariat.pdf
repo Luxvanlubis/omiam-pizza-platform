@@ -1,0 +1,87 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 300
+>>
+stream
+BT
+/F1 24 Tf
+100 700 Td
+(DOSSIER DE PARTENARIAT) Tj
+0 -50 Td
+/F1 18 Tf
+(O'MIAM PIZZA) Tj
+0 -40 Td
+/F1 14 Tf
+(Rejoignez notre reseau de partenaires) Tj
+0 -30 Td
+(Producteurs locaux - Artisans) Tj
+0 -30 Td
+(Criteres de selection:) Tj
+0 -20 Td
+(- Qualite premium) Tj
+0 -20 Td
+(- Production locale) Tj
+0 -20 Td
+(- Valeurs durables) Tj
+0 -40 Td
+(Contact: partenaires@omiam.fr) Tj
+0 -20 Td
+(Tel: +33 1 42 00 00 00) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000053 00000 n 
+0000000100 00000 n 
+0000000200 00000 n 
+0000000550 00000 n 
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+620
+%%EOF

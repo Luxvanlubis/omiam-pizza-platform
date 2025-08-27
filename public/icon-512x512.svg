@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#dc2626"/>
+  <circle cx="256" cy="256" r="192" fill="#fef3c7"/>
+  <path d="M256 128c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 20c59.647 0 108 48.353 108 108s-48.353 108-108 108-108-48.353-108-108 48.353-108 108-108z" fill="#dc2626"/>
+  <text x="256" y="280" font-family="Arial, sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="#dc2626">O'M</text>
+  <circle cx="206" cy="206" r="20" fill="#dc2626"/>
+  <circle cx="306" cy="206" r="20" fill="#dc2626"/>
+  <circle cx="256" cy="306" r="16" fill="#dc2626"/>
+  <circle cx="226" cy="326" r="12" fill="#dc2626"/>
+  <circle cx="286" cy="326" r="12" fill="#dc2626"/>
+  <circle cx="196" cy="286" r="8" fill="#dc2626"/>
+  <circle cx="316" cy="286" r="8" fill="#dc2626"/>
+</svg>

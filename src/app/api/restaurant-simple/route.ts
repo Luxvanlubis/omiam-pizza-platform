@@ -1,0 +1,51 @@
+import { NextResponse } from 'next/server';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { supabaseIntegrationService } from '@/lib/supabase-integration-service';
+
+export async function GET() {
+  try {
+    console.log('🔍 Starting restaurant API call...');
+    const supabase = supabaseIntegrationService.getSupabaseClient();
+    
+    // Simple query first
+    const { count: restaurantCount, error: countError } = await supabase
+      .from('restaurants')
+      .select('*', { count: 'exact', head: true });
+
+    if (countError) {
+      throw new Error(`Erreur lors du comptage des restaurants: ${countError.message}`);
+    }
+
+    console.log('📊 Restaurant count:', restaurantCount);
+
+    if (restaurantCount === 0) {
+      return NextResponse.json({
+        success: false,
+        message: 'No restaurants found in database'
+      });
+    }
+
+    // Get basic restaurant data
+    const { data: restaurant, error: restaurantError } = await supabase
+      .from('restaurants')
+      .select('id, name, description, address, phone, email, website, rating')
+      .single();
+
+    if (restaurantError) {
+      throw new Error(`Erreur lors de la récupération du restaurant: ${restaurantError.message}`);
+    }
+
+    console.log('✅ Restaurant found:', restaurant?.name);
+
+    return NextResponse.json({
+      success: true,
+      data: restaurant
+    });
+  } catch (error) {
+    console.error('❌ Restaurant API error:', error instanceof Error ? error.message : String(error));
+    return NextResponse.json({
+      error: 'Erreur lors de la récupération des données du restaurant'
+    }, { status: 500 });
+  }
+}

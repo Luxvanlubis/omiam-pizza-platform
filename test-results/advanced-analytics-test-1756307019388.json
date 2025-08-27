@@ -1,0 +1,105 @@
+{
+  "timestamp": "2025-08-27T15:03:34.567Z",
+  "status": "FAILED",
+  "tests": [
+    {
+      "name": "Analytics Temps Réel",
+      "status": "FAILED",
+      "duration": 3235,
+      "error": "this.page.waitForTimeout is not a function"
+    },
+    {
+      "name": "Graphiques Avancés",
+      "status": "PASSED",
+      "duration": 3,
+      "details": {
+        "charts": {
+          "recharts": 0,
+          "canvas": 0,
+          "svg": 3,
+          "chartjs": 0,
+          "d3": 0
+        },
+        "chartTypes": {
+          "lineCharts": 0,
+          "barCharts": 0,
+          "pieCharts": 0,
+          "areaCharts": 0
+        },
+        "interactive": {
+          "tooltips": 0,
+          "legends": 0,
+          "filters": 0
+        }
+      }
+    },
+    {
+      "name": "Interactivité Dashboard",
+      "status": "FAILED",
+      "duration": 101,
+      "error": "this.page.waitForTimeout is not a function"
+    },
+    {
+      "name": "Métriques de Performance Avancées",
+      "status": "PASSED",
+      "duration": 7,
+      "details": {
+        "domContentLoaded": 0.09999996423721313,
+        "loadComplete": 0,
+        "firstPaint": 1496,
+        "firstContentfulPaint": 1496,
+        "totalLoadTime": null,
+        "memory": {
+          "jsHeapUsed": 130421795,
+          "jsHeapTotal": 137098327,
+          "jsHeapLimit": 4294705152
+        }
+      }
+    }
+  ],
+  "analytics": {
+    "realTimeData": {},
+    "charts": {
+      "charts": {
+        "recharts": 0,
+        "canvas": 0,
+        "svg": 3,
+        "chartjs": 0,
+        "d3": 0
+      },
+      "chartTypes": {
+        "lineCharts": 0,
+        "barCharts": 0,
+        "pieCharts": 0,
+        "areaCharts": 0
+      },
+      "interactive": {
+        "tooltips": 0,
+        "legends": 0,
+        "filters": 0
+      }
+    },
+    "interactions": {},
+    "performance": {
+      "domContentLoaded": 0.09999996423721313,
+      "loadComplete": 0,
+      "firstPaint": 1496,
+      "firstContentfulPaint": 1496,
+      "totalLoadTime": null,
+      "memory": {
+        "jsHeapUsed": 130421795,
+        "jsHeapTotal": 137098327,
+        "jsHeapLimit": 4294705152
+      }
+    }
+  },
+  "summary": {
+    "total": 4,
+    "passed": 2,
+    "failed": 2,
+    "successRate": 50
+  },
+  "screenshots": [
+    "F:\\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\\test-results\\advanced-analytics-1756307018976.png"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "timestamp": "2025-08-27T14:59:32.998Z",
+  "status": "PASSED",
+  "tests": [
+    {
+      "name": "Accès Dashboard Admin",
+      "status": "PASSED",
+      "duration": 1602,
+      "details": {
+        "loadTime": "1602ms",
+        "title": "",
+        "elements": {
+          "header": false,
+          "navigation": false,
+          "statsCards": 0,
+          "charts": 0,
+          "tables": 0,
+          "buttons": 0
+        }
+      }
+    },
+    {
+      "name": "Composants Analytics",
+      "status": "PASSED",
+      "details": {
+        "components": {
+          "realTimeMetrics": 0,
+          "kpiCards": 0,
+          "charts": 0,
+          "tables": 0,
+          "filters": 0,
+          "tabs": 0
+        },
+        "hasData": {
+          "numbers": false,
+          "percentages": false,
+          "currency": false,
+          "dates": false
+        }
+      }
+    },
+    {
+      "name": "Navigation Modules Admin",
+      "status": "PASSED",
+      "details": {
+        "modules": [],
+        "testedModules": 0
+      }
+    },
+    {
+      "name": "Métriques de Performance",
+      "status": "PASSED",
+      "details": {
+        "domContentLoaded": 0.20000004768371582,
+        "loadComplete": 0,
+        "firstPaint": 1480,
+        "firstContentfulPaint": 1480,
+        "jsHeapUsed": 16805892
+      }
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "warnings": 0
+  },
+  "performance": {
+    "dashboardLoad": 1602,
+    "domContentLoaded": 0.20000004768371582,
+    "loadComplete": 0,
+    "firstPaint": 1480,
+    "firstContentfulPaint": 1480,
+    "jsHeapUsed": 16805892,
+    "jsHeapTotal": 20246528
+  },
+  "screenshots": [
+    "F:\\OMIAM z ai workspace-83f2679f-c7ce-409a-9e01-dfac21829333\\test-results\\dashboard-1756306776900.png"
+  ]
+}

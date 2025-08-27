@@ -1,0 +1,201 @@
+import { NextRequest, NextResponse } from 'next/server';
+import Stripe from 'stripe';
+import { headers } from 'next/headers';
+
+// Initialiser Stripe
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2024-06-20',
+  typescript: true,
+});
+
+// Clé secrète du webhook pour la vérification de signature
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+
+export async function POST(request: NextRequest) {
+  try {
+    // Vérifier que le webhook secret est configuré
+    if (!webhookSecret) {
+      console.error('STRIPE_WEBHOOK_SECRET non configuré');
+      return NextResponse.json({
+        error: 'Configuration webhook manquante'
+      }, { status: 500 });
+    }
+
+    // Récupérer le body brut de la requête
+    const body = await request.text();
+
+    // Récupérer la signature Stripe
+    const headersList = await headers();
+    const signature = headersList.get('stripe-signature');
+
+    if (!signature) {
+      console.error('Signature Stripe manquante');
+      return NextResponse.json({
+        error: 'Signature manquante'
+      }, { status: 400 });
+    }
+
+    let event: Stripe.Event;
+    try {
+      // Vérifier la signature du webhook (sécurité PCI DSS)
+      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    } catch (err: any) {
+      console.error('Erreur de vérification signature webhook:', err.message);
+      return NextResponse.json({
+        error: 'Signature invalide'
+      }, { status: 400 });
+    }
+
+    // Traiter les différents types d'événements
+    switch (event.type) {
+      case 'payment_intent.succeeded':
+        await handlePaymentSucceeded(event.data.object as Stripe.PaymentIntent);
+        break;
+      case 'payment_intent.payment_failed':
+        await handlePaymentFailed(event.data.object as Stripe.PaymentIntent);
+        break;
+      case 'payment_intent.canceled':
+        await handlePaymentCanceled(event.data.object as Stripe.PaymentIntent);
+        break;
+      case 'payment_intent.requires_action':
+        await handlePaymentRequiresAction(event.data.object as Stripe.PaymentIntent);
+        break;
+      case 'charge.dispute.created':
+        await handleChargeDispute(event.data.object as Stripe.Dispute);
+        break;
+      default:
+        console.log(`Événement non géré: ${event.type}`);
+    }
+
+    return NextResponse.json({
+      received: true
+    });
+  } catch (error: any) {
+    console.error('Erreur webhook Stripe:', error);
+    return NextResponse.json({
+      error: 'Erreur interne du serveur'
+    }, { status: 500 });
+  }
+}
+
+// Gestionnaire pour paiement réussi
+async function handlePaymentSucceeded(paymentIntent: Stripe.PaymentIntent) {
+  try {
+    console.log(`✅ Paiement réussi: ${paymentIntent.id}`);
+
+    // Extraire les métadonnées de la commande
+    const metadata = paymentIntent.metadata;
+    const customerEmail = metadata.customer_email;
+    const orderType = metadata.order_type;
+    const totalAmount = parseFloat(metadata.total_amount || '0');
+
+    // Log sécurisé
+    console.log(`Commande confirmée - Email: ${customerEmail}, Type: ${orderType}, Montant: ${totalAmount}€`);
+
+    // TODO: Intégrer avec la base de données pour créer la commande
+    // TODO: Envoyer email de confirmation
+    // TODO: Notifier la cuisine via WebSocket
+
+    // Exemple de structure de commande à sauvegarder
+    const orderData = {
+      paymentIntentId: paymentIntent.id,
+      customerEmail,
+      orderType,
+      totalAmount,
+      status: 'confirmed',
+      paymentStatus: 'paid',
+      createdAt: new Date(),
+      metadata
+    };
+
+    console.log('Données de commande à sauvegarder:', orderData);
+  } catch (error) {
+    console.error('Erreur lors du traitement du paiement réussi:', error);
+  }
+}
+
+// Gestionnaire pour paiement échoué
+async function handlePaymentFailed(paymentIntent: Stripe.PaymentIntent) {
+  try {
+    console.log(`❌ Paiement échoué: ${paymentIntent.id}`);
+    const metadata = paymentIntent.metadata;
+    const customerEmail = metadata.customer_email;
+
+    // Log de l'échec
+    console.log(`Échec de paiement - Email: ${customerEmail}, Raison: ${paymentIntent.last_payment_error?.message || 'Inconnue'}`);
+
+    // TODO: Notifier le client de l'échec
+    // TODO: Proposer des alternatives de paiement
+  } catch (error) {
+    console.error('Erreur lors du traitement du paiement échoué:', error);
+  }
+}
+
+// Gestionnaire pour paiement annulé
+async function handlePaymentCanceled(paymentIntent: Stripe.PaymentIntent) {
+  try {
+    console.log(`🚫 Paiement annulé: ${paymentIntent.id}`);
+    const metadata = paymentIntent.metadata;
+    const customerEmail = metadata.customer_email;
+
+    console.log(`Paiement annulé - Email: ${customerEmail}`);
+
+    // TODO: Nettoyer les données temporaires
+    // TODO: Libérer les stocks réservés
+  } catch (error) {
+    console.error('Erreur lors du traitement du paiement annulé:', error);
+  }
+}
+
+// Gestionnaire pour paiement nécessitant une action
+async function handlePaymentRequiresAction(paymentIntent: Stripe.PaymentIntent) {
+  try {
+    console.log(`⚠️ Paiement nécessite une action: ${paymentIntent.id}`);
+    const metadata = paymentIntent.metadata;
+    const customerEmail = metadata.customer_email;
+
+    console.log(`Action requise - Email: ${customerEmail}`);
+
+    // TODO: Notifier le client qu'une action est requise
+    // TODO: Envoyer instructions par email si nécessaire
+  } catch (error) {
+    console.error('Erreur lors du traitement de l\'action requise:', error);
+  }
+}
+
+// Gestionnaire pour litige de paiement
+async function handleChargeDispute(dispute: Stripe.Dispute) {
+  try {
+    console.log(`⚖️ Litige créé: ${dispute.id}`);
+
+    // Log du litige pour investigation
+    console.log(`Litige - Montant: ${dispute.amount / 100}€, Raison: ${dispute.reason}`);
+
+    // TODO: Alerter l'équipe de gestion
+    // TODO: Préparer la documentation pour la réponse au litige
+  } catch (error) {
+    console.error('Erreur lors du traitement du litige:', error);
+  }
+}
+
+// Seule méthode POST autorisée pour les webhooks
+export async function GET() {
+  return NextResponse.json(
+    { error: 'Méthode non autorisée' },
+    { status: 405 }
+  );
+}
+
+export async function PUT() {
+  return NextResponse.json(
+    { error: 'Méthode non autorisée' },
+    { status: 405 }
+  );
+}
+
+export async function DELETE() {
+  return NextResponse.json(
+    { error: 'Méthode non autorisée' },
+    { status: 405 }
+  );
+}

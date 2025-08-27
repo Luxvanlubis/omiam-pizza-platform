@@ -1,0 +1,16 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { pushNotificationService } from '@/lib/push-notification-service';
+
+// POST /api/notifications/subscribe - S'abonner aux notifications push
+export async function POST(request: NextRequest) {
+  try { const body = await request.json(); const { userId, subscription, userAgent } = body; if (!userId || !subscription) { return NextResponse.json( { error: 'User ID and subscription are required' }, { status: 400 } ); } // Valider la structure de la souscription if (!subscription.endpoint || !subscription.s?.p256dh || !subscription.s?.auth) { return NextResponse.json( { error: 'Invalid subscription format' }, { status: 400 } ); } const result = await pushNotificationService.subscribeToPush( userId, subscription, userAgent ); return NextResponse.json({
+       success: true, subscriptionId: result.id 
+    });   } catch (error) { console.error('Error subscribing to push notifications:', error instanceof Error ? error.message : String(error)); return NextResponse.json( { error: 'Failed to subscribe to push notifications' }, { status: 500 } ); }
+}
+
+// DELETE /api/notifications/subscribe - Se désabonner des notifications push
+export async function DELETE(request: NextRequest) {
+  try { const body = await request.json(); const { userId, endpoint } = body; if (!userId || !endpoint) { return NextResponse.json( { error: 'User ID and endpoint are required' }, { status: 400 } ); } await pushNotificationService.unsubscribeFromPush(userId, endpoint); return NextResponse.json({
+       success: true 
+    });   } catch (error) { console.error('Error unsubscribing from push notifications:', error instanceof Error ? error.message : String(error)); return NextResponse.json( { error: 'Failed to unsubscribe from push notifications' }, { status: 500 } ); }
+}

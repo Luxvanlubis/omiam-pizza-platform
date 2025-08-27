@@ -1,0 +1,237 @@
+name: Security Scan
+
+on:
+  schedule:
+    # Exécuter tous les jours à 2h du matin UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Permet l'exécution manuelle
+  push:
+    branches: [ main ]
+    paths:
+      - 'package*.json'
+      - '.github/workflows/security-scan.yml'
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  dependency-scan:
+    name: 🔍 Dependency Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: |
+          echo "Running npm audit..."
+          npm audit --audit-level=moderate --json > audit-results.json || true
+          
+          # Afficher les résultats
+          if [ -s audit-results.json ]; then
+            echo "Security vulnerabilities found:"
+            cat audit-results.json | jq '.vulnerabilities | length'
+            cat audit-results.json | jq '.vulnerabilities | to_entries[] | select(.value.severity == "high" or .value.severity == "critical")'
+          else
+            echo "No security vulnerabilities found."
+          fi
+
+      - name: Upload audit results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: npm-audit-results
+          path: audit-results.json
+          retention-days: 30
+
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: |
+            --severity-threshold=medium
+            --json-file-output=snyk-results.json
+        continue-on-error: true
+
+      - name: Upload Snyk results to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: snyk-results.sarif
+        continue-on-error: true
+
+  docker-scan:
+    name: 🐳 Docker Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' # Skip on scheduled runs
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          cat > Dockerfile << 'EOF'
+          FROM node:18-alpine
+          WORKDIR /app
+          COPY package*.json ./
+          RUN npm ci --only=production
+          COPY . .
+          RUN npm run build
+          EXPOSE 3000
+          CMD ["npm", "start"]
+          EOF
+          docker build -t security-scan-image .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'security-scan-image'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  secrets-scan:
+    name: 🔐 Secrets Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch full history for secret scanning
+
+      - name: Run GitLeaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+      - name: Run TruffleHog
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: main
+          head: HEAD
+          extra_args: --debug --only-verified
+
+  license-check:
+    name: 📄 License Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install license checker
+        run: npm install -g license-checker
+
+      - name: Check licenses
+        run: |
+          echo "Checking package licenses..."
+          license-checker --json --out licenses.json
+          
+          # Vérifier les licences problématiques
+          if license-checker --failOn 'GPL;AGPL;LGPL;CPAL;OSL;EPL;MPL' --summary; then
+            echo "✅ No problematic licenses found"
+          else
+            echo "❌ Problematic licenses detected"
+            exit 1
+          fi
+
+      - name: Upload license report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: license-report
+          path: licenses.json
+          retention-days: 30
+
+  security-report:
+    name: 📊 Security Report
+    runs-on: ubuntu-latest
+    needs: [dependency-scan, secrets-scan, license-check]
+    if: always()
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Generate security report
+        run: |
+          echo "# Security Scan Report - $(date)" > security-report.md
+          echo "" >> security-report.md
+          
+          echo "## Summary" >> security-report.md
+          echo "- Dependency Scan: ${{ needs.dependency-scan.result }}" >> security-report.md
+          echo "- Secrets Detection: ${{ needs.secrets-scan.result }}" >> security-report.md
+          echo "- License Check: ${{ needs.license-check.result }}" >> security-report.md
+          echo "" >> security-report.md
+          
+          if [ -f npm-audit-results/audit-results.json ]; then
+            echo "## NPM Audit Results" >> security-report.md
+            echo '```json' >> security-report.md
+            cat npm-audit-results/audit-results.json >> security-report.md
+            echo '```' >> security-report.md
+            echo "" >> security-report.md
+          fi
+          
+          echo "Report generated at: $(date)" >> security-report.md
+
+      - name: Upload security report
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-report
+          path: security-report.md
+          retention-days: 90
+
+      - name: Create issue on security findings
+        if: needs.dependency-scan.result == 'failure' || needs.secrets-scan.result == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const title = `🚨 Security vulnerabilities detected - ${new Date().toISOString().split('T')[0]}`;
+            const body = `
+            ## Security Scan Results
+            
+            **Date:** ${new Date().toISOString()}
+            **Workflow:** ${context.workflow}
+            **Run ID:** ${context.runId}
+            
+            ### Results:
+            - Dependency Scan: ${{ needs.dependency-scan.result }}
+            - Secrets Detection: ${{ needs.secrets-scan.result }}
+            - License Check: ${{ needs.license-check.result }}
+            
+            Please review the security findings and take appropriate action.
+            
+            **Artifacts:** Check the workflow run for detailed reports.
+            `;
+            
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['security', 'high-priority']
+            });

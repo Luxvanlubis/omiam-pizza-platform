@@ -1,0 +1,37 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pizza base (rectangular for flammekueche) -->
+  <rect x="80" y="50" width="240" height="160" rx="10" fill="#F5DEB3" stroke="#D2691E" stroke-width="3"/>
+  
+  <!-- Crème fraîche base -->
+  <rect x="85" y="55" width="230" height="150" rx="8" fill="#FFFAF0" opacity="0.9"/>
+  
+  <!-- Onion slices -->
+  <ellipse cx="120" cy="100" rx="15" ry="8" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="180" cy="90" rx="18" ry="10" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="250" cy="110" rx="16" ry="9" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="140" cy="140" rx="14" ry="7" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="220" cy="130" rx="17" ry="8" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="280" cy="140" rx="15" ry="9" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="160" cy="170" rx="16" ry="8" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="240" cy="180" rx="14" ry="7" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  <ellipse cx="110" cy="180" rx="13" ry="6" fill="#F8F8FF" stroke="#E6E6FA" stroke-width="1" opacity="0.8"/>
+  
+  <!-- Lardons (bacon pieces) -->
+  <rect x="130" y="80" width="12" height="6" rx="2" fill="#FFB6C1" transform="rotate(15 136 83)"/>
+  <rect x="200" y="100" width="10" height="5" rx="2" fill="#FFB6C1" transform="rotate(-20 205 102)"/>
+  <rect x="260" y="90" width="11" height="6" rx="2" fill="#FFB6C1" transform="rotate(30 265 93)"/>
+  <rect x="150" y="120" width="9" height="5" rx="2" fill="#FFB6C1" transform="rotate(-10 154 122)"/>
+  <rect x="210" y="150" width="12" height="6" rx="2" fill="#FFB6C1" transform="rotate(25 216 153)"/>
+  <rect x="270" y="160" width="10" height="5" rx="2" fill="#FFB6C1" transform="rotate(-15 275 162)"/>
+  <rect x="120" y="160" width="11" height="6" rx="2" fill="#FFB6C1" transform="rotate(40 125 163)"/>
+  <rect x="190" y="180" width="9" height="5" rx="2" fill="#FFB6C1" transform="rotate(-25 194 182)"/>
+  <rect x="250" y="170" width="10" height="6" rx="2" fill="#FFB6C1" transform="rotate(10 255 173)"/>
+  
+  <!-- Darker lardons for variety -->
+  <rect x="170" y="110" width="8" height="4" rx="2" fill="#CD5C5C" transform="rotate(20 174 112)"/>
+  <rect x="230" y="120" width="9" height="5" rx="2" fill="#CD5C5C" transform="rotate(-30 234 122)"/>
+  <rect x="140" y="190" width="7" height="4" rx="2" fill="#CD5C5C" transform="rotate(35 143 192)"/>
+  
+  <!-- Title -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8B4513">Flammekueche</text>
+</svg>

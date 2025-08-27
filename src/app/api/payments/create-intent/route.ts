@@ -1,0 +1,106 @@
+/**
+ * Create Payment Intent API Endpoint
+ * Handles payment intent creation for orders
+ */
+
+import { NextRequest, NextResponse } from 'next/server'
+import { stripeService } from '@/lib/stripe-service'
+
+// Simple validation function
+function validatePaymentRequest(body: any) {
+  if (!body.amount || typeof body.amount !== 'number' || body.amount < 0.5 || body.amount > 999999) {
+    throw new Error('Amount must be between 0.5 and 999,999');
+  }
+  
+  return {
+    amount: body.amount,
+    currency: body.currency || 'eur',
+    orderId: body.orderId,
+    customerId: body.customerId,
+    description: body.description,
+    metadata: body.metadata || {}
+  };
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    
+    // Validate input
+    const validatedData = validatePaymentRequest(body);
+    const { amount, currency, orderId, customerId, description, metadata = {} } = validatedData;
+    
+    // Add order ID to metadata if provided
+    if (orderId) {
+      metadata.orderId = orderId;
+    }
+    
+    if (customerId) {
+      metadata.customerId = customerId;
+    }
+    
+    if (description) {
+      metadata.description = description;
+    }
+    
+    // Create payment intent
+    const paymentIntent = await stripeService.createPaymentIntent(
+      amount,
+      currency,
+      metadata
+    );
+    
+    return NextResponse.json({
+      success: true,
+      paymentIntent: {
+        id: paymentIntent.id,
+        client_secret: paymentIntent.client_secret,
+        amount: paymentIntent.amount,
+        currency: paymentIntent.currency,
+        status: paymentIntent.status
+      },
+      config: {
+        publishableKey: stripeService.getPublishableKey(),
+        isMockMode: stripeService.isMockMode()
+      }
+    });
+    
+  } catch (error) {
+    console.error('Payment intent creation failed:', error instanceof Error ? error.message : String(error));
+    
+    if (error instanceof Error && error.message.includes('Amount')) {
+      return NextResponse.json({
+        success: false,
+        error: 'Validation failed',
+        details: error.message
+      }, { status: 400 });
+    }
+    
+    return NextResponse.json({
+      success: false,
+      error: 'Payment intent creation failed',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  return NextResponse.json({
+    message: 'Payment Intent Creation API',
+    methods: ['POST'],
+    requiredFields: ['amount'],
+    optionalFields: [
+      'currency',
+      'orderId',
+      'customerId',
+      'description',
+      'metadata'
+    ],
+    example: {
+      amount: 29.99,
+      currency: 'eur',
+      orderId: 'order_123',
+      description: 'Pizza Margherita + Boisson'
+    }
+  });
+}

@@ -1,0 +1,6 @@
+import { chromium, FullConfig } from '@playwright/;
+
+async function globalSetup(config: FullConfig) { console.log('🚀 Starting global setup for E2E s...'); // Vérifier que le serveur de développement est accessible const baseURL = config.projects[0].use.baseURL'http://localhost:3004'; try { const browser = await chromium.launch(); const page = await browser.newPage(); // Attendre que le serveur soit prêt console.log(`⏳ Waiting for server at ${baseURL}...`); await page.goto(baseURL, { waitUntil: 'networkidle' }); // Vérifier que la page se charge correctement await page.waitForSelector('body', { timeout: 30000 }); console.log('✅ Server is ready for E2E s'); await browser.close(); } catch (error) { console.error('❌ Failed to connect to development server:', error); throw new Error(`Development server is not accessible at ${baseURL}`); } // Setup des données de  si nécessaire console.log('📝 Setting up  data...'); // Ici on pourrait: // - Créer des utilisateurs de // - Initialiser la base de données de // - Configurer des mocks externes console.log('✅ Global setup completed');
+}
+
+export default globalSetup;

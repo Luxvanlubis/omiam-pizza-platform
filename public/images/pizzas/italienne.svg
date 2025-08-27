@@ -1,0 +1,50 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pizza base -->
+  <circle cx="200" cy="150" r="120" fill="#F4A460" stroke="#D2691E" stroke-width="3"/>
+  
+  <!-- Tomato sauce -->
+  <circle cx="200" cy="150" r="110" fill="#DC143C" opacity="0.8"/>
+  
+  <!-- Mozzarella -->
+  <circle cx="170" cy="130" r="16" fill="#FFFAF0"/>
+  <circle cx="230" cy="140" r="18" fill="#FFFAF0"/>
+  <circle cx="190" cy="180" r="14" fill="#FFFAF0"/>
+  <circle cx="220" cy="170" r="15" fill="#FFFAF0"/>
+  <circle cx="150" cy="170" r="13" fill="#FFFAF0"/>
+  <circle cx="250" cy="160" r="16" fill="#FFFAF0"/>
+  
+  <!-- Italian flag colors with ingredients -->
+  <!-- Green: Basil and arugula -->
+  <path d="M140 140 Q145 135 150 140 Q145 145 140 140" fill="#228B22"/>
+  <path d="M260 150 Q265 145 270 150 Q265 155 260 150" fill="#228B22"/>
+  <path d="M180 200 Q185 195 190 200 Q185 205 180 200" fill="#228B22"/>
+  <path d="M210 110 Q215 105 220 110 Q215 115 210 110" fill="#228B22"/>
+  
+  <!-- White: Already represented by mozzarella -->
+  
+  <!-- Red: Cherry tomatoes and pepperoni -->
+  <circle cx="160" cy="160" r="6" fill="#FF6347"/>
+  <circle cx="240" cy="130" r="7" fill="#FF6347"/>
+  <circle cx="200" cy="190" r="6" fill="#FF6347"/>
+  <circle cx="180" cy="120" r="5" fill="#FF6347"/>
+  
+  <!-- Pepperoni slices -->
+  <circle cx="145" cy="180" r="8" fill="#B22222" stroke="#8B0000" stroke-width="1"/>
+  <circle cx="255" cy="170" r="9" fill="#B22222" stroke="#8B0000" stroke-width="1"/>
+  <circle cx="200" cy="140" r="8" fill="#B22222" stroke="#8B0000" stroke-width="1"/>
+  <circle cx="170" cy="200" r="7" fill="#B22222" stroke="#8B0000" stroke-width="1"/>
+  
+  <!-- Parmesan shavings -->
+  <path d="M130 150 Q135 148 140 152 Q135 154 130 150" fill="#FFFFE0" opacity="0.8"/>
+  <path d="M270 140 Q275 138 280 142 Q275 144 270 140" fill="#FFFFE0" opacity="0.8"/>
+  <path d="M190 210 Q195 208 200 212 Q195 214 190 210" fill="#FFFFE0" opacity="0.8"/>
+  
+  <!-- Italian herbs (oregano) -->
+  <circle cx="155" cy="135" r="1" fill="#9ACD32"/>
+  <circle cx="245" cy="185" r="1" fill="#9ACD32"/>
+  <circle cx="215" cy="155" r="1" fill="#9ACD32"/>
+  <circle cx="175" cy="175" r="1" fill="#9ACD32"/>
+  
+  <!-- Title -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8B4513">Pizza Italienne</text>
+</svg>

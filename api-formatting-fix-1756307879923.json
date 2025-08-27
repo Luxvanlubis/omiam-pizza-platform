@@ -1,0 +1,75 @@
+{
+  "timestamp": "2025-08-27T15:17:59.920Z",
+  "summary": {
+    "totalFiles": 36,
+    "fixedFiles": 16,
+    "errors": 0
+  },
+  "fixedFiles": [
+    {
+      "file": "src\\app\\api\\health\\inventory\\route.ts",
+      "backup": "src\\app\\api\\health\\inventory\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\health\\stripe\\route.ts",
+      "backup": "src\\app\\api\\health\\stripe\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\health\\supabase\\route.ts",
+      "backup": "src\\app\\api\\health\\supabase\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\inventory\\alerts\\route.ts",
+      "backup": "src\\app\\api\\inventory\\alerts\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\inventory\\movements\\route.ts",
+      "backup": "src\\app\\api\\inventory\\movements\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\inventory\\route.ts",
+      "backup": "src\\app\\api\\inventory\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\notifications\\preferences\\route.ts",
+      "backup": "src\\app\\api\\notifications\\preferences\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\notifications\\stats\\route.ts",
+      "backup": "src\\app\\api\\notifications\\stats\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\notifications\\subscribe\\route.ts",
+      "backup": "src\\app\\api\\notifications\\subscribe\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\orders\\route.ts",
+      "backup": "src\\app\\api\\orders\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\payments\\create-intent\\route.ts",
+      "backup": "src\\app\\api\\payments\\create-intent\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\restaurant-simple\\route.ts",
+      "backup": "src\\app\\api\\restaurant-simple\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\reviews\\route.ts",
+      "backup": "src\\app\\api\\reviews\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\stripe\\health\\route.ts",
+      "backup": "src\\app\\api\\stripe\\health\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\test\\route.ts",
+      "backup": "src\\app\\api\\test\\route.ts.backup"
+    },
+    {
+      "file": "src\\app\\api\\webhooks\\stripe\\route.ts",
+      "backup": "src\\app\\api\\webhooks\\stripe\\route.ts.backup"
+    }
+  ],
+  "errors": []
+}

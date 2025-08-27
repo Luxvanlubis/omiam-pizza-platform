@@ -1,0 +1,252 @@
+{
+  "timestamp": "2025-08-27T15:12:05.339Z",
+  "status": "READY",
+  "categories": {
+    "codeQuality": {
+      "tests": [
+        {
+          "name": "Structure du projet",
+          "status": "SUCCESS",
+          "details": {
+            "required": [
+              "src",
+              "public",
+              "components",
+              "pages"
+            ],
+            "existing": [
+              "src",
+              "components",
+              "pages"
+            ]
+          },
+          "error": null
+        },
+        {
+          "name": "Configuration package.json",
+          "status": "SUCCESS",
+          "details": {
+            "scripts": [
+              "dev",
+              "build",
+              "start",
+              "lint",
+              "test",
+              "type-check"
+            ],
+            "dependenciesCount": 60
+          },
+          "error": null
+        },
+        {
+          "name": "Configuration TypeScript",
+          "status": "SUCCESS",
+          "details": {
+            "tsConfigExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Composants principaux",
+          "status": "SUCCESS",
+          "details": {
+            "required": 4,
+            "existing": 3,
+            "components": [
+              "src/components/Header.tsx",
+              "src/components/Cart.tsx",
+              "src/app/page.tsx"
+            ]
+          },
+          "error": null
+        }
+      ],
+      "score": 100
+    },
+    "security": {
+      "tests": [
+        {
+          "name": "Template .env.example",
+          "status": "SUCCESS",
+          "details": {
+            "envExampleExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Configuration .gitignore",
+          "status": "SUCCESS",
+          "details": {
+            "hasEnvIgnore": true,
+            "hasNodeModulesIgnore": true
+          },
+          "error": null
+        },
+        {
+          "name": "Headers de sécurité Next.js",
+          "status": "SUCCESS",
+          "details": {
+            "hasSecurityHeaders": true
+          },
+          "error": null
+        },
+        {
+          "name": "Packages de sécurité",
+          "status": "SUCCESS",
+          "details": {
+            "found": [
+              "helmet",
+              "cors",
+              "express-rate-limit"
+            ],
+            "available": [
+              "bcryptjs",
+              "helmet",
+              "cors",
+              "express-rate-limit"
+            ]
+          },
+          "error": null
+        }
+      ],
+      "score": 100
+    },
+    "performance": {
+      "tests": [
+        {
+          "name": "Manifest PWA",
+          "status": "SUCCESS",
+          "details": {
+            "manifestExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Service Worker",
+          "status": "SUCCESS",
+          "details": {
+            "swExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Optimisations Next.js",
+          "status": "SUCCESS",
+          "details": {
+            "hasOptimizations": true
+          },
+          "error": null
+        },
+        {
+          "name": "Optimisation des images",
+          "status": "SUCCESS",
+          "details": {
+            "totalImages": 0,
+            "largeImages": 0,
+            "largeImagesList": []
+          },
+          "error": null
+        }
+      ],
+      "score": 100
+    },
+    "deployment": {
+      "tests": [
+        {
+          "name": "Fichiers Docker",
+          "status": "SUCCESS",
+          "details": {
+            "required": [
+              "Dockerfile",
+              "docker-compose.yml",
+              ".dockerignore"
+            ],
+            "existing": [
+              "Dockerfile",
+              "docker-compose.yml",
+              ".dockerignore"
+            ]
+          },
+          "error": null
+        },
+        {
+          "name": "Configuration production",
+          "status": "SUCCESS",
+          "details": {
+            "envProdExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Configuration Nginx",
+          "status": "SUCCESS",
+          "details": {
+            "nginxExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Health Check API",
+          "status": "SUCCESS",
+          "details": {
+            "healthCheckExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Scripts de déploiement",
+          "status": "SUCCESS",
+          "details": {
+            "hasBuildScript": "next build",
+            "hasStartScript": "NODE_ENV=production tsx server.ts"
+          },
+          "error": null
+        }
+      ],
+      "score": 100
+    },
+    "documentation": {
+      "tests": [
+        {
+          "name": "README.md",
+          "status": "WARNING",
+          "details": {
+            "readmeExists": true,
+            "quality": "WARNING"
+          },
+          "error": null
+        },
+        {
+          "name": "Guide de déploiement",
+          "status": "SUCCESS",
+          "details": {
+            "deploymentGuideExists": true
+          },
+          "error": null
+        },
+        {
+          "name": "Commentaires dans le code",
+          "status": "SUCCESS",
+          "details": {
+            "totalFiles": 312,
+            "filesWithComments": 242,
+            "coverage": "78%"
+          },
+          "error": null
+        }
+      ],
+      "score": 67
+    }
+  },
+  "overallScore": 93,
+  "recommendations": [
+    {
+      "priority": "MEDIUM",
+      "category": "documentation",
+      "message": "1 amélioration(s) possible(s) dans documentation",
+      "actions": [
+        "Améliorer: README.md"
+      ]
+    }
+  ]
+}

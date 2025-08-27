@@ -1,0 +1,37 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pizza base -->
+  <circle cx="200" cy="150" r="120" fill="#F4A460" stroke="#D2691E" stroke-width="3"/>
+  
+  <!-- Tomato sauce -->
+  <circle cx="200" cy="150" r="110" fill="#DC143C" opacity="0.8"/>
+  
+  <!-- Mozzarella -->
+  <circle cx="170" cy="130" r="18" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="230" cy="140" r="20" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="190" cy="180" r="16" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="220" cy="170" r="17" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="160" cy="170" r="15" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="240" cy="160" r="14" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="180" cy="200" r="13" fill="#FFFAF0" opacity="0.9"/>
+  <circle cx="210" cy="120" r="12" fill="#FFFAF0" opacity="0.9"/>
+  
+  <!-- Fresh basil leaves -->
+  <path d="M150 140 Q155 135 160 140 Q155 145 150 140" fill="#228B22"/>
+  <path d="M250 150 Q255 145 260 150 Q255 155 250 150" fill="#228B22"/>
+  <path d="M180 210 Q185 205 190 210 Q185 215 180 210" fill="#228B22"/>
+  <path d="M220 110 Q225 105 230 110 Q225 115 220 110" fill="#228B22"/>
+  <path d="M140 180 Q145 175 150 180 Q145 185 140 180" fill="#228B22"/>
+  <path d="M260 180 Q265 175 270 180 Q265 185 260 180" fill="#228B22"/>
+  <path d="M200 190 Q205 185 210 190 Q205 195 200 190" fill="#228B22"/>
+  <path d="M170 120 Q175 115 180 120 Q175 125 170 120" fill="#228B22"/>
+  
+  <!-- Extra virgin olive oil drizzle -->
+  <circle cx="145" cy="155" r="2" fill="#FFD700" opacity="0.7"/>
+  <circle cx="255" cy="165" r="2" fill="#FFD700" opacity="0.7"/>
+  <circle cx="200" cy="200" r="2" fill="#FFD700" opacity="0.7"/>
+  <circle cx="175" cy="125" r="2" fill="#FFD700" opacity="0.7"/>
+  <circle cx="225" cy="185" r="2" fill="#FFD700" opacity="0.7"/>
+  
+  <!-- Title -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8B4513">Pizza Margarita</text>
+</svg>

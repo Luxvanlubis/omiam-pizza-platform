@@ -1,0 +1,224 @@
+{
+  "timestamp": "2025-08-27T15:21:22.996Z",
+  "totalFiles": 36,
+  "fixedFiles": 18,
+  "errors": 0,
+  "details": [
+    {
+      "file": "src\\app\\api\\test\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\reviews\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\restaurant-simple\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\restaurant\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\notifications\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\inventory\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\orders\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\health\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\debug\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\customization\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\create-payment-intent\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\webhooks\\stripe\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\translations\\[lang]\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\stripe\\health\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\products\\[id]\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\payments\\create-intent\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\notifications\\subscribe\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\notifications\\stats\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\notifications\\stream\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\notifications\\preferences\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\inventory\\movements\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\inventory\\items\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\inventory\\alerts\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\orders\\[id]\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\health\\supabase\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\health\\stripe\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\health\\inventory\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\health\\email\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\health\\database\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\emails\\send\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\auth\\signup\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\auth\\login\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\orders\\[id]\\tracking\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\orders\\[id]\\notifications\\route.ts",
+      "success": true,
+      "changed": true,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\auth\\admin\\logout\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    },
+    {
+      "file": "src\\app\\api\\auth\\admin\\login\\route.ts",
+      "success": true,
+      "changed": false,
+      "error": null
+    }
+  ]
+}

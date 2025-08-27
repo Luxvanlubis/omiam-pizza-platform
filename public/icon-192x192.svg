@@ -1,0 +1,11 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="24" fill="#dc2626"/>
+  <circle cx="96" cy="96" r="72" fill="#fef3c7"/>
+  <path d="M96 48c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm0 8c22.091 0 40 17.909 40 40s-17.909 40-40 40-40-17.909-40-40 17.909-40 40-40z" fill="#dc2626"/>
+  <text x="96" y="106" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#dc2626">O'M</text>
+  <circle cx="76" cy="76" r="8" fill="#dc2626"/>
+  <circle cx="116" cy="76" r="8" fill="#dc2626"/>
+  <circle cx="96" cy="116" r="6" fill="#dc2626"/>
+  <circle cx="86" cy="126" r="4" fill="#dc2626"/>
+  <circle cx="106" cy="126" r="4" fill="#dc2626"/>
+</svg>
